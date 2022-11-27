@@ -1,4 +1,5 @@
 import { InferGetStaticPropsType } from 'next';
+import { createClient } from "next-sanity";
 
 export default function page(
   { animals }: InferGetStaticPropsType<typeof getStaticProps>
@@ -46,17 +47,15 @@ type Animal = {
   name: string;
 };
 
+const client = createClient({
+  projectId: "o03yrqfl",
+  dataset: "production",
+  apiVersion: "2022-03-25",
+  useCdn: false
+});
+
 export async function getStaticProps() {
-  const animals: Animal[] = [
-    /* {
-      _createdAt: "2022-03-08T09:28:00Z",
-      _id: "1f69c53d-418a-452f-849a-e92466bb9c75",
-      _rev: "xnBg0xhUDzo561jnWODd5e",
-      _type: "animal",
-      _updatedAt: "2022-03-08T09:28:00Z",
-      name: "Capybara"
-    } */
-  ];
+  const animals = await client.fetch<Animal[]>(`*[_type == "animal"]`);
 
   return {
     props: {
