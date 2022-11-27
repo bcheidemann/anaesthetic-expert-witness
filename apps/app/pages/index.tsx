@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType } from 'next';
-import { createClient } from "next-sanity";
+import { createClient } from 'next-sanity';
 
 export default function page(
   { animals }: InferGetStaticPropsType<typeof getStaticProps>
@@ -28,7 +28,7 @@ export default function page(
           <div>
             <div>¯\_(ツ)_/¯</div>
             <p>
-              Your data will show up here when you've configured everything
+              Your data will show up here when you&apos;ve configured everything
               correctly
             </p>
           </div>
@@ -48,9 +48,9 @@ type Animal = {
 };
 
 const client = createClient({
-  projectId: "o03yrqfl",
-  dataset: "production",
-  apiVersion: "2022-03-25",
+  projectId: 'o03yrqfl',
+  dataset: 'production',
+  apiVersion: '2022-03-25',
   useCdn: false
 });
 
