@@ -3,7 +3,6 @@
   "version": 2,
   "projects": {
     "app": "apps/app",
-    "app-e2e": "apps/app-e2e",
-    "cms": "apps/cms"
+    "app-e2e": "apps/app-e2e"
   }
 }
