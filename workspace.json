@@ -4,6 +4,7 @@
   "projects": {
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
+    "cms": "libs/cms",
     "theme": "libs/theme"
   }
 }

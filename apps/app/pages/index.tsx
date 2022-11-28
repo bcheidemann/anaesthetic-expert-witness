@@ -1,9 +1,6 @@
 import { InferGetStaticPropsType } from 'next';
-import { createClient } from 'next-sanity';
-import { PortableText } from '@portabletext/react'
 import { css } from '@emotion/react';
-import { colors } from '@aew/theme';
-import { Divider } from '@mui/material';
+import { Footer } from '../components/footer';
 
 export default function page(
   { footerSections }: InferGetStaticPropsType<typeof getStaticProps>
@@ -45,127 +42,17 @@ export default function page(
 
 <p>Velit non culpa incididunt ut non nostrud officia voluptate laboris minim eu proident id. Ea adipisicing dolor amet adipisicing minim proident nostrud Lorem consectetur non aliqua. Nostrud laboris esse in exercitation irure Lorem proident in. Culpa fugiat id sit consequat exercitation commodo officia anim. Amet velit aliqua dolor deserunt do cillum eiusmod sit ipsum eiusmod esse aliquip esse. Laboris enim incididunt consectetur pariatur eu in occaecat.</p>
       </main>
-      <footer
-        css={css`
-          height: fit-content;
-
-          background: ${colors.blue.base};
-          color: ${colors.text.white};
-
-          a {
-            color: ${colors.text.white};
-            font-weight: 700;
-            text-decoration: none;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        `}
-      >
-        <div
-          css={css`
-            padding: 30px;
-
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-          `}
-        >
-          {
-            footerSections
-              .filter(({ type }) => type === 'default')
-              .map((section) => (
-                <section
-                  key={section._id}
-                  css={css`
-                    max-width: 400px;
-                    width: fit-content;
-                    height: fit-content;
-
-                    padding: 10px 30px;
-
-                    border: 1px solid ${colors.blue[100]};
-                    border-radius: 30px;
-
-                    transition: 0.2s background;
-                    
-                    &:hover {
-                      background: ${colors.blue[100]};
-                      border: 1px solid ${colors.blue[300]};
-                    }
-                  `}
-                >
-                  <h2>{section.title}</h2>
-                  <PortableText
-                    value={section.content}
-                  />
-                </section>
-              ))
-          }
-        </div>
-        <Divider sx={{ marginInline: 'auto', background: colors.blue[300], height: 1 }} />
-        <div
-          css={css`
-            padding: 15px 30px;
-
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0 30px;
-
-            background: ${colors.blue[100]};
-          `}
-        >
-          {
-            footerSections
-              .filter(({ type }) => type === 'smallPrint')
-              .map((section) => (
-                <section
-                  key={section._id}
-                  css={css`
-                    width: fit-content;
-                    height: fit-content;
-                  `}
-                >
-                  <PortableText
-                    value={section.content}
-                  />
-                </section>
-              ))
-          }
-        </div>
-      </footer>
+      <Footer footerSections={footerSections} />
     </div>
   );
 }
 
-type FooterSection = {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: string;
-  _updatedAt: string;
-  title: string;
-  content: any;
-  index: number;
-  type: 'default' | 'smallPrint';
-};
-
-const client = createClient({
-  projectId: 'gvr7lqga',
-  dataset: 'production',
-  apiVersion: '2022-03-25',
-  useCdn: false
-});
-
 export async function getStaticProps() {
-  const footerSections = (await client.fetch<FooterSection[]>(`*[_type == "footerSection"]`)).sort((a, b) => a.index - b.index);
+  const footerProps = await Footer.getStaticProps();
 
   return {
     props: {
-      footerSections
+      ...footerProps,
     }
   };
 }

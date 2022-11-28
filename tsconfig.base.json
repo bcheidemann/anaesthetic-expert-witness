@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@aew/cms": ["libs/cms/src/index.ts"],
       "@aew/theme": ["libs/theme/src/index.ts"]
     }
   },
