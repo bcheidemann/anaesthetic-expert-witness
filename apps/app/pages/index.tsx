@@ -1,9 +1,10 @@
 import { InferGetStaticPropsType } from 'next';
 import { css } from '@emotion/react';
 import { Footer } from '../components/footer';
+import { Header } from '../components/header';
 
 export default function page(
-  { footerSections }: InferGetStaticPropsType<typeof getStaticProps>
+  { footerProps, headerProps }: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
     <div
@@ -14,9 +15,7 @@ export default function page(
         flex-direction: column;
       `}
     >
-      <header>
-        <h1>Sanity + Next.js</h1>
-      </header>
+      <Header {...headerProps} />
       <main
         css={css`
           flex: 1;
@@ -42,17 +41,19 @@ export default function page(
 
 <p>Velit non culpa incididunt ut non nostrud officia voluptate laboris minim eu proident id. Ea adipisicing dolor amet adipisicing minim proident nostrud Lorem consectetur non aliqua. Nostrud laboris esse in exercitation irure Lorem proident in. Culpa fugiat id sit consequat exercitation commodo officia anim. Amet velit aliqua dolor deserunt do cillum eiusmod sit ipsum eiusmod esse aliquip esse. Laboris enim incididunt consectetur pariatur eu in occaecat.</p>
       </main>
-      <Footer footerSections={footerSections} />
+      <Footer {...footerProps} />
     </div>
   );
 }
 
 export async function getStaticProps() {
   const footerProps = await Footer.getStaticProps();
+  const headerProps = await Header.getStaticProps();
 
   return {
     props: {
-      ...footerProps,
+      footerProps,
+      headerProps,
     }
   };
 }
