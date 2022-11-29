@@ -1,6 +1,7 @@
-import { imageUrlBuilderFactory, getImageDetails } from "libs/cms-image-utils/src";
+import { getImageDetails, imageUrlBuilderFactory } from '@aew/cms-image-utils';
+
 import { client } from "./client";
-import { RawImageAsset, ImageAsset } from "./types";
+import { ImageAsset,RawImageAsset } from "./types";
 
 export const imageUrlBuilder = imageUrlBuilderFactory(client);
 

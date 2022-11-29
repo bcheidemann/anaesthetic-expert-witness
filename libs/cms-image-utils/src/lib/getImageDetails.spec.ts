@@ -1,4 +1,5 @@
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
+
 import { getImageDetails } from './getImageDetails';
 
 describe('getImageDetails', () => {

@@ -1,5 +1,6 @@
-import { InferGetStaticPropsType } from 'next';
 import { css } from '@emotion/react';
+import { InferGetStaticPropsType } from 'next';
+
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
 

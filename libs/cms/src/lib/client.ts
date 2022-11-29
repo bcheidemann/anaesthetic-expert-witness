@@ -1,4 +1,5 @@
 import { createClient } from 'next-sanity';
+
 import { projectId } from './constants';
 
 export const client = createClient({

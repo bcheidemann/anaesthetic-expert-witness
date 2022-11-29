@@ -1,5 +1,5 @@
+import { ImageDetails } from '@aew/cms-image-utils';
 import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
-import { ImageDetails } from "libs/cms-image-utils/src";
 
 export type FooterSection = {
   _createdAt: string;

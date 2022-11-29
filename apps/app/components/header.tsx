@@ -1,4 +1,4 @@
-import { fetchImageAsset } from 'libs/cms/src';
+import { fetchImageAsset } from '@aew/cms';
 
 type Props = Awaited<ReturnType<typeof Header.getStaticProps>>;
 

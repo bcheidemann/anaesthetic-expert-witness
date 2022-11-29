@@ -1,8 +1,8 @@
-import { css } from '@emotion/react';
-import { PortableText } from '@portabletext/react';
+import { client, FooterSection } from '@aew/cms';
 import { colors } from '@aew/theme';
+import { css } from '@emotion/react';
 import { Divider } from '@mui/material';
-import { client, FooterSection } from 'libs/cms/src';
+import { PortableText } from '@portabletext/react';
 
 type Props = Awaited<ReturnType<typeof Footer.getStaticProps>>;
 
