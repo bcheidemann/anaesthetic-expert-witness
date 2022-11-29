@@ -1,4 +1,5 @@
 import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+import { ImageDetails } from "libs/cms-image-utils/src";
 
 export type FooterSection = {
   _createdAt: string;
@@ -23,4 +24,9 @@ export type RawImageAsset = {
   title: string;
 };
 
-export type ImageAsset = Omit<RawImageAsset, 'image'> & { image: ImageUrlBuilder };
+export type ImageAsset = Omit<RawImageAsset, 'image'> & {
+  image: {
+    builder: ImageUrlBuilder;
+    details: ImageDetails;
+  }
+};

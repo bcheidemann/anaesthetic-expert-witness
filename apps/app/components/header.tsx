@@ -1,7 +1,3 @@
-import { css } from '@emotion/react';
-import { PortableText } from '@portabletext/react';
-import { colors } from '@aew/theme';
-import { Divider } from '@mui/material';
 import { fetchImageAsset } from 'libs/cms/src';
 
 type Props = Awaited<ReturnType<typeof Header.getStaticProps>>;
@@ -15,22 +11,28 @@ export function Header({ logo }: Props) {
 }
 
 Header.getStaticProps = async function() {
+  const imageHeight = 164;
   const logoAsset = await fetchImageAsset('aew-logo');
 
   if (!logoAsset) {
     return {
       logo: {
         alt: logoAsset.title,
-        src: ''
+        src: '',
+        height: `${imageHeight}px`,
+        width: `${imageHeight}px`,
       }
     }
   }
 
+  const aspectRatio = logoAsset.image.details.width / logoAsset.image.details.height;
+
   return {
     logo: {
       alt: logoAsset.title,
-      src: logoAsset.image.height(164).url(),
-      height: '164px',
+      src: logoAsset.image.builder.height(164).url(),
+      height: `${imageHeight}px`,
+      width: `${Math.round(aspectRatio * imageHeight)}px`
     }
   };
 }

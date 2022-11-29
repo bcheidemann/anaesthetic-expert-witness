@@ -5,6 +5,7 @@
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
     "cms": "libs/cms",
+    "cms-image-utils": "libs/cms-image-utils",
     "theme": "libs/theme"
   }
 }

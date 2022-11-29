@@ -1,4 +1,4 @@
-import imageUrlBuilderFactory from '@sanity/image-url';
+import { imageUrlBuilderFactory, getImageDetails } from "libs/cms-image-utils/src";
 import { client } from "./client";
 import { RawImageAsset, ImageAsset } from "./types";
 
@@ -13,6 +13,9 @@ export async function fetchImageAsset(id: string): Promise<ImageAsset | null> {
 
   return {
     ...asset,
-    image: imageUrlBuilder.image(asset.image),
+    image: {
+      builder: imageUrlBuilder.image(asset.image),
+      details: getImageDetails(imageUrlBuilder.image(asset.image)),
+    },
   };
 }
