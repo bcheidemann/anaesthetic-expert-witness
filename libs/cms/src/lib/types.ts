@@ -1,3 +1,5 @@
+import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+
 export type FooterSection = {
   _createdAt: string;
   _id: string;
@@ -10,19 +12,15 @@ export type FooterSection = {
   type: 'default' | 'smallPrint';
 };
 
-export type ImageAsset = {
+export type RawImageAsset = {
   _createdAt: string;
   _id: string;
   _rev: string;
   _type: string;
   _updatedAt: string;
   id: string;
-  image: {
-    _type: string;
-    asset: {
-      _ref: `image-${string}-${string}`,
-      _type: 'reference'
-    }
-  };
+  image: unknown;
   title: string;
 };
+
+export type ImageAsset = Omit<RawImageAsset, 'image'> & { image: ImageUrlBuilder };

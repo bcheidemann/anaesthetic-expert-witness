@@ -1,17 +1,18 @@
+import imageUrlBuilderFactory from '@sanity/image-url';
 import { client } from "./client";
-import { ImageAsset } from "./types";
+import { RawImageAsset, ImageAsset } from "./types";
+
+export const imageUrlBuilder = imageUrlBuilderFactory(client);
 
 export async function fetchImageAsset(id: string): Promise<ImageAsset | null> {
-  const [ asset ] = await client.fetch<ImageAsset[]>('*[_type == "imageAsset" && id == "aew-logo"]');
+  const [ asset ] = await client.fetch<RawImageAsset[]>(`*[_type == "imageAsset" && id == "${id}"]`);
 
-  return asset || null;
-}
+  if (!asset) {
+    return null;
+  }
 
-export function imageAssetToImageUrl(asset: ImageAsset): string {
-  const ref = asset.image.asset._ref;
-
-  const id = ref.replace(/-[a-z]+$/, '').replace(/^image-/, '');
-  const extension = ref.split('-').pop();
-
-  return `https://cdn.sanity.io/images/gvr7lqga/production/${id}.${extension}`;
+  return {
+    ...asset,
+    image: imageUrlBuilder.image(asset.image),
+  };
 }
