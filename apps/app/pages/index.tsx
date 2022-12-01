@@ -1,32 +1,19 @@
-import { css } from '@emotion/react';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
+import { Layout } from '../components/layout';
 import { Page } from '../components/page';
 
 export default function page(
-  { footerProps, pageProps, headerProps }: InferGetStaticPropsType<typeof getStaticProps>
+  { headerProps, pageProps, footerProps  }: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
-    <div
-      css={css`
-        min-height: 100vh; /* Support browsers which don't support dynamic viewport height */
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-      `}
-    >
-      <Header {...headerProps} />
-      <main
-        css={css`
-          flex: 1;
-        `}
-      >
-        <Page {...pageProps} />
-      </main>
-      <Footer {...footerProps} />
-    </div>
+    <Layout
+      headerProps={headerProps}
+      pageProps={pageProps}
+      footerProps={footerProps}
+    />
   );
 }
 
