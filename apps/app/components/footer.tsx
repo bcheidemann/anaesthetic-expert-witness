@@ -1,4 +1,5 @@
-import { client, FooterSection } from '@aew/cms';
+import { client } from '@aew/cms';
+import { FooterSection } from '@aew/cms-types';
 import { colors } from '@aew/theme';
 import { css } from '@emotion/react';
 import { Divider } from '@mui/material';
@@ -29,44 +30,51 @@ export function Footer({ footerSections }: Props) {
       <div
         css={css`
           padding: 30px;
-
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 30px;
         `}
       >
-        {
-          footerSections
-            .filter(({ type }) => type === 'default')
-            .map((section) => (
-              <section
-                key={section._id}
-                css={css`
-                  max-width: 400px;
-                  width: fit-content;
-                  height: fit-content;
+        <div
+          css={css`
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
 
-                  padding: 10px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+          `}
+        >
+          {
+            footerSections
+              .filter(({ type }) => type === 'default')
+              .map((section) => (
+                <section
+                  key={section._id}
+                  css={css`
+                    flex: 1;
+                    min-width: 350px;
+                    height: fit-content;
 
-                  border: 1px solid ${colors.blue[100]};
-                  border-radius: 30px;
+                    padding: 10px 30px;
 
-                  transition: 0.2s background;
-                  
-                  &:hover {
-                    background: ${colors.blue[100]};
-                    border: 1px solid ${colors.blue[300]};
-                  }
-                `}
-              >
-                <h2>{section.title}</h2>
-                <PortableText
-                  value={section.content}
-                />
-              </section>
-            ))
-        }
+                    border: 1px solid ${colors.blue[100]};
+                    border-radius: 30px;
+
+                    transition: 0.2s background;
+                    
+                    &:hover {
+                      background: ${colors.blue[100]};
+                      border: 1px solid ${colors.blue[300]};
+                    }
+                  `}
+                >
+                  <h2>{section.title}</h2>
+                  <PortableText
+                    value={section.content}
+                  />
+                </section>
+              ))
+          }
+        </div>
       </div>
       <Divider sx={{ marginInline: 'auto', background: colors.blue[300], height: 1 }} />
       <div

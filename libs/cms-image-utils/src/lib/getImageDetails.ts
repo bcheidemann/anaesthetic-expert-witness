@@ -1,6 +1,7 @@
 import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
 
 function imageRefToDetails(imageRef: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, id, resString, format] = imageRef.split('-');
   const [width, height] = resString.split('x').map(Number);
 

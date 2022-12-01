@@ -1,14 +1,14 @@
-import { getImageDetails, imageUrlBuilderFactory } from '@aew/cms-image-utils';
+import { getImageDetails } from '@aew/cms-image-utils';
+import { Image } from "@aew/cms-types";
 
 import { client } from "./client";
-import { ImageAsset,RawImageAsset } from "./types";
-
-export const imageUrlBuilder = imageUrlBuilderFactory(client);
+import { imageUrlBuilder } from './imageBuilder';
+import { ImageAsset } from "./types";
 
 export async function fetchImageAsset(id: string): Promise<ImageAsset | null> {
-  const [ asset ] = await client.fetch<RawImageAsset[]>(`*[_type == "imageAsset" && id == "${id}"]`);
+  const [ asset ] = await client.fetch<Image[]>(`*[_type == "imageAsset" && id == "${id}"]`);
 
-  if (!asset) {
+  if (!asset?.image) {
     return null;
   }
 
