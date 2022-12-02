@@ -51,7 +51,7 @@ export function Footer({ footerSections }: Props) {
                   key={section._id}
                   css={css`
                     flex: 1;
-                    min-width: 350px;
+                    min-width: min(350px, 100%);
                     height: fit-content;
 
                     padding: 10px 30px;
